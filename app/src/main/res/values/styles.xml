@@ -35,6 +35,11 @@
         <item name="android:fontFamily">@font/playfair_display_sc_bold</item>
         <item name="android:textAllCaps">false</item>
     </style>
+    <style name="textYearHeader" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">38sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
     <style name="textTypeDate" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">30sp</item>

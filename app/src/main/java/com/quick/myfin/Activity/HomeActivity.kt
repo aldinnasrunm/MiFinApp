@@ -14,18 +14,29 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.dewinjm.monthyearpicker.MonthYearPickerDialogFragment
+import com.quick.myfin.Adapter.CalendarAdapter
 import com.quick.myfin.Adapter.ListItemAdapter
+import com.quick.myfin.Models.CalendarModel
 import com.quick.myfin.Models.inOutDatabase
 import com.quick.myfin.R
 import kotlinx.android.synthetic.main.activity_home.*
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
+    private val DAYS_COUNT = 42
+    private val calendarList = ArrayList<CalendarModel>()
+    private val calendar = Calendar.getInstance()
+    private var tahun : Int = -1
+    private var monthOfYear : Int = -1
+    private var adapter : CalendarAdapter = CalendarAdapter(calendarList)
     private lateinit var  helperInOut : inOutDatabase
     lateinit var mAdapter : ListItemAdapter
     lateinit var rv_list : RecyclerView
@@ -48,12 +59,97 @@ class HomeActivity : AppCompatActivity() {
         formatRupiah = NumberFormat.getCurrencyInstance(localeID)
         rv_list = findViewById(R.id.rv_balanceList)
         updateList()
+        loadCalendar()
+
+        calendar_month.setOnClickListener {
+            showMonthYearPicker()
+        }
+        calendar_year.setOnClickListener {
+            showMonthYearPicker()
+        }
+
+        rv_calendar.layoutManager = GridLayoutManager(applicationContext, 7)
+        rv_calendar.adapter = adapter
+
+
         cv_balance.setOnClickListener {
             addBalance()
         }
         tv_viewAll.setOnClickListener {
             startActivity(Intent(this, ShowAllActivity::class.java))
         }
+    }
+
+    private fun showMonthYearPicker() {
+        val dialogFragment  = MonthYearPickerDialogFragment.getInstance(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR))
+        dialogFragment.show(supportFragmentManager, null)
+
+        dialogFragment.setOnDateSetListener { year, month ->
+            tahun = year
+            monthOfYear = month
+            loadCalendar()
+        }
+    }
+
+    private fun loadCalendar() {
+        //ubah val ke var
+        val cells = ArrayList<CalendarModel>()         // inisialisasi variabel untuk setiap tanggal kalender
+        if (tahun != -1 && monthOfYear != -1 ){     // pengecekan bila varuiabel tahun dan monthOfYear kosong (-1 hanya pengecoh)
+            //ubah obyek kalender ke tahun dan bulan yang diterima
+            calendar.set(Calendar.MONTH, monthOfYear)
+            calendar.set(Calendar.YEAR, tahun)
+        } else {
+            // set variabel tahun dan monthOfYear ke tahun dan bulan sekarang
+            tahun = calendar.get(Calendar.YEAR)
+            monthOfYear = calendar.get(Calendar.MONTH)
+        }
+        var sdf = SimpleDateFormat("MMMM,yyyy", Locale("in", "ID"))  // obyek untuk parse bulan dan tahun
+        val dateToday = sdf.format(calendar.time).split(",") //format obyek calendar lalu split berdasarkan ,
+        calendar_month.text = dateToday[0] //settext bulan ke textview month
+        calendar_year.text = dateToday[1] //settext bulan ke textview year
+
+        //calendarToday
+        val calendarCompare : Calendar = Calendar.getInstance() //instansiasi obyek calendar pembanding
+
+        calendarCompare.set(Calendar.MONTH, monthOfYear) //set bulan pada calendar pembanding ke monthOfYear
+        calendarCompare.set(Calendar.YEAR, tahun) //set tahun pada calendar pembanding ke tahun
+
+
+        // memnentukan kapan tanggal dimulai pada bulan
+        calendar.set(Calendar.DAY_OF_MONTH, 1)
+        val monthBeginningCell = calendar.get(Calendar.DAY_OF_WEEK) - 1
+
+        // pindah calendar ke awal minggu
+        calendar.add(Calendar.DAY_OF_MONTH,-monthBeginningCell)
+
+        //obyek untuk parse tanggal
+        sdf = SimpleDateFormat("dd-MM-yyyy", Locale("in", "ID"))
+
+        // isi tanggal
+        while (cells.size < DAYS_COUNT) {
+            if(sdf.format(calendar.time).equals("13-05-2019")){
+                cells.add(CalendarModel(
+                    calendar.get(Calendar.DATE),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.YEAR),
+                    calendarCompare,
+                    "hijau"
+                ))
+            }else{
+                cells.add(CalendarModel(
+                    calendar.get(Calendar.DATE),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.YEAR),
+                    calendarCompare,
+                    null
+                ))
+            }
+            calendar.add(Calendar.DAY_OF_MONTH, 1)
+        }
+
+        calendarList.clear()
+        calendarList.addAll(cells)
+        adapter.notifyDataSetChanged()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
