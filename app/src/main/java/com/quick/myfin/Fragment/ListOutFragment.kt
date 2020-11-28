@@ -5,56 +5,49 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.quick.myfin.Adapter.ListItemAdapter
+import com.quick.myfin.Models.inOutDatabase
 import com.quick.myfin.R
+import java.text.NumberFormat
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ListOutFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ListOutFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var rv_listOut : RecyclerView
+    lateinit var tv_totalOut : TextView
+    lateinit var mAdapter: ListItemAdapter
+    lateinit var helperInOut: inOutDatabase
+    private lateinit var formatRupiah : NumberFormat
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_out, container, false)
+        val v : View = inflater.inflate(R.layout.fragment_list_out, container, false)
+        rv_listOut = v.findViewById(R.id.rv_listOut)
+        tv_totalOut = v.findViewById(R.id.tv_totalOut)
+        return v
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListOutFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ListOutFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        helperInOut = inOutDatabase(context)
+        val localeID = Locale("in", "ID")
+        formatRupiah = NumberFormat.getCurrencyInstance(localeID)
+        mAdapter = ListItemAdapter(helperInOut.selectOut())
+        rv_listOut.setHasFixedSize(true)
+        rv_listOut.layoutManager = LinearLayoutManager(context)
+        rv_listOut.adapter = mAdapter
+
+        updateTotalOutCard()
+    }
+
+    private fun updateTotalOutCard() {
+        tv_totalOut.setText(formatRupiah.format(helperInOut.getOutBalance()))
     }
 }

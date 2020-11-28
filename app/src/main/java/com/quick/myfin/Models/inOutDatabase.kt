@@ -32,18 +32,28 @@ class inOutDatabase(var context: Context?) : SQLiteOpenHelper(context, "db_inOut
         mQuery = "SELECT * FROM tb_inOutCom ORDER BY _id DESC"
         return db.rawQuery(mQuery, null)
     }
+    fun selectIn(): Cursor? {
+        val db = this.writableDatabase
+        mQuery = "SELECT * FROM tb_inOutCom WHERE status_balance = 'in' ORDER BY _id DESC"
+        return db.rawQuery(mQuery, null)
+    }
+    fun selectOut(): Cursor? {
+        val db = this.writableDatabase
+        mQuery = "SELECT * FROM tb_inOutCom WHERE status_balance = 'out' ORDER BY _id DESC"
+        return db.rawQuery(mQuery, null)
+    }
 
     fun getTotal(): Int {
         val db = this.writableDatabase
-        mQuery = "SELECT SUM(total_balance) FROM  tb_inOutCom WHERE status_balance = in"
+        mQuery = "SELECT SUM(total_balance) FROM  tb_inOutCom WHERE status_balance = 'in'"
         val i = db.rawQuery(mQuery, null)
         var total = 0
         if (i.moveToFirst()) {
             total = i.getInt(0)
         }
         return total
-
     }
+
     fun getOutBalance(): Int {
         val db = this.writableDatabase
         mQuery = "SELECT SUM(total_balance) FROM  tb_inOutCom WHERE status_balance = 'out'"
