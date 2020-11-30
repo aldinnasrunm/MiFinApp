@@ -34,7 +34,7 @@ class ListAllFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         helperInOut = inOutDatabase(context)
-        mAdapter = ListItemAdapter(helperInOut.select())
+        mAdapter = ListItemAdapter(helperInOut.select(), context)
         rv_listAll.setHasFixedSize(true)
         rv_listAll.layoutManager = LinearLayoutManager(context)
         rv_listAll.adapter = mAdapter

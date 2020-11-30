@@ -19,8 +19,8 @@ class ShowAllActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_all)
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-
+        supportActionBar?.setElevation(0F)
+        supportActionBar?.setTitle(R.string.list_keuangan)
         tabAction = findViewById(R.id.tab_actionList)
         vp_list = findViewById(R.id.vp_list)
         setupViewPager(vp_list)

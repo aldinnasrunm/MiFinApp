@@ -16,17 +16,18 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.tan
 
-class CalendarAdapter(private val mData : ArrayList<CalendarModel>) :
+class CalendarAdapter(private val mData: ArrayList<CalendarModel>) :
     RecyclerView.Adapter<CalendarAdapter.HomeItem>() {
 
-    class HomeItem(v : View):RecyclerView.ViewHolder(v) {
-        var date : TextView = v.findViewById(R.id.tv_date)
-        var dot : ImageView = v.findViewById(R.id.iv_dot)
-        var mContext : Context = v.context
+    class HomeItem(v: View) : RecyclerView.ViewHolder(v) {
+        var date: TextView = v.findViewById(R.id.tv_date)
+        var dot: ImageView = v.findViewById(R.id.iv_dot)
+        var mContext: Context = v.context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeItem {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_item_date, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_item_date, parent, false)
         return HomeItem(view)
     }
 
@@ -34,33 +35,39 @@ class CalendarAdapter(private val mData : ArrayList<CalendarModel>) :
         return mData.size
     }
 
-    private fun dateBuilder(tanggal : Int, bulan : Int, tahun : Int) : String{
-        val tgl : String = if (tanggal.toString().length == 1){
+    private fun dateBuilder(tanggal: Int, bulan: Int, tahun: Int): String {
+        val tgl: String = if (tanggal.toString().length == 1) {
             "0$tanggal"
-        }else{
-            ""+tanggal
+        } else {
+            "" + tanggal
         }
-        val bln : String = if (bulan.toString().length == 1 ){
+        val bln: String = if (bulan.toString().length == 1) {
             "0$bulan"
-        }else{
-            ""+bulan
+        } else {
+            "" + bulan
         }
         return "$tgl-$bln-$tahun"
 
     }
 
     override fun onBindViewHolder(holder: HomeItem, position: Int) {
-        holder.date.text = mData[position].date.toString()
-        holder.date.setOnClickListener{
-            Toast.makeText(holder.mContext, dateBuilder(mData[position].date, mData[position].month+1, mData[position].year), Toast.LENGTH_SHORT).show()
-        }
-        if (mData[position].month == mData[position].calendarCompare.get(Calendar.MONTH) && mData[position].year == mData[position].calendarCompare.get(Calendar.YEAR)){
+        val theDate =
+            dateBuilder(mData[position].date, mData[position].month + 1, mData[position].year)
+        val part =  theDate.split("-").toTypedArray()
+        holder.date.text =part[0]
+            holder.date.setOnClickListener {
+                Toast.makeText(holder.mContext, theDate, Toast.LENGTH_SHORT).show()
+            }
+        if (mData[position].month == mData[position].calendarCompare.get(Calendar.MONTH) && mData[position].year == mData[position].calendarCompare.get(
+                Calendar.YEAR
+            )
+        ) {
             holder.date.setTextColor(ContextCompat.getColor(holder.mContext, R.color.date_true))
-        }else{
+        } else {
             holder.date.setTextColor(ContextCompat.getColor(holder.mContext, R.color.date_false))
         }
-        if (mData[position].status.equals("hijau")){
-            holder.dot.setImageDrawable(ContextCompat.getDrawable(holder.mContext,R.drawable.dot))
+        if (mData[position].status.equals("hijau")) {
+            holder.dot.setImageDrawable(ContextCompat.getDrawable(holder.mContext, R.drawable.dot))
         }
 
     }

@@ -47,12 +47,11 @@ class HomeActivity : AppCompatActivity() {
         requestWindowFeature(1)
         setContentView(R.layout.activity_home)
         supportActionBar?.hide()
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-        window.setStatusBarColor(Color.TRANSPARENT)
+//        window.setFlags(
+//            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+//            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        window.setStatusBarColor(Color.WHITE)
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-        supportActionBar?.hide()
 
         helperInOut = inOutDatabase(this)
         val localeID = Locale("in", "ID")
@@ -80,6 +79,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun showMonthYearPicker() {
         val dialogFragment  = MonthYearPickerDialogFragment.getInstance(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR))
         dialogFragment.show(supportFragmentManager, null)
@@ -91,7 +91,14 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun loadCalendar() {
+
+        val current = LocalDateTime.now()
+
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatted = current.format(formatter)
+
         //ubah val ke var
         val cells = ArrayList<CalendarModel>()         // inisialisasi variabel untuk setiap tanggal kalender
         if (tahun != -1 && monthOfYear != -1 ){     // pengecekan bila varuiabel tahun dan monthOfYear kosong (-1 hanya pengecoh)
@@ -127,7 +134,7 @@ class HomeActivity : AppCompatActivity() {
 
         // isi tanggal
         while (cells.size < DAYS_COUNT) {
-            if(sdf.format(calendar.time).equals("13-05-2019")){
+            if(sdf.format(calendar.time).equals(formatted)){
                 cells.add(CalendarModel(
                     calendar.get(Calendar.DATE),
                     calendar.get(Calendar.MONTH),
@@ -188,9 +195,9 @@ class HomeActivity : AppCompatActivity() {
             }
             updateList()
         }
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this, R.style.CustomAlertDialog)
             .setView(privateView)
-            .setPositiveButton("yes", DialogInterface.OnClickListener { dialog, which ->
+            .setPositiveButton("Done", DialogInterface.OnClickListener { dialog, which ->
                 Toast.makeText(this, "click", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             }).show()
@@ -199,11 +206,21 @@ class HomeActivity : AppCompatActivity() {
     private fun updateList(){
         tv_balance.setText(formatRupiah.format(helperInOut.getBalance()))
         tv_outBalance.setText("- "+formatRupiah.format(helperInOut.getOutBalance()))
-        mAdapter = com.quick.myfin.Adapter.ListItemAdapter(helperInOut.select())
+        mAdapter = com.quick.myfin.Adapter.ListItemAdapter(helperInOut.select(), this)
         mAdapter.notifyDataSetChanged()
+
         rv_list.setHasFixedSize(true)
         rv_list.layoutManager = LinearLayoutManager(this)
         rv_list.adapter = mAdapter
+        var i : Int = rv_list.adapter!!.itemCount
+        if(i == 0){
+            ll_empty.visibility = View.VISIBLE
+            rv_list.visibility = View.INVISIBLE
+        }else{
+            ll_empty.visibility = View.GONE
+            rv_list.visibility = View.VISIBLE
+        }
+
     }
 
     companion object {

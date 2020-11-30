@@ -43,6 +43,12 @@ class inOutDatabase(var context: Context?) : SQLiteOpenHelper(context, "db_inOut
         return db.rawQuery(mQuery, null)
     }
 
+    fun deleteItem(id: Int) {
+        //SQLite Delete ndes
+        val db = this.writableDatabase
+        mQuery = "DELETE FROM tb_inOutCom WHERE _id =$id"
+        db.execSQL(mQuery)
+    }
     fun getTotal(): Int {
         val db = this.writableDatabase
         mQuery = "SELECT SUM(total_balance) FROM  tb_inOutCom WHERE status_balance = 'in'"

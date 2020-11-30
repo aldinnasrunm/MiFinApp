@@ -39,7 +39,7 @@ class ListOutFragment : Fragment() {
         helperInOut = inOutDatabase(context)
         val localeID = Locale("in", "ID")
         formatRupiah = NumberFormat.getCurrencyInstance(localeID)
-        mAdapter = ListItemAdapter(helperInOut.selectOut())
+        mAdapter = ListItemAdapter(helperInOut.selectOut(), context)
         rv_listOut.setHasFixedSize(true)
         rv_listOut.layoutManager = LinearLayoutManager(context)
         rv_listOut.adapter = mAdapter
