@@ -80,6 +80,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun showMonthYearPicker() {
         val dialogFragment  = MonthYearPickerDialogFragment.getInstance(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR))
         dialogFragment.show(supportFragmentManager, null)
@@ -91,7 +92,14 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun loadCalendar() {
+
+        val current = LocalDateTime.now()
+
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatted = current.format(formatter)
+
         //ubah val ke var
         val cells = ArrayList<CalendarModel>()         // inisialisasi variabel untuk setiap tanggal kalender
         if (tahun != -1 && monthOfYear != -1 ){     // pengecekan bila varuiabel tahun dan monthOfYear kosong (-1 hanya pengecoh)
@@ -127,7 +135,7 @@ class HomeActivity : AppCompatActivity() {
 
         // isi tanggal
         while (cells.size < DAYS_COUNT) {
-            if(sdf.format(calendar.time).equals("13-05-2019")){
+            if(sdf.format(calendar.time).equals(formatted)){
                 cells.add(CalendarModel(
                     calendar.get(Calendar.DATE),
                     calendar.get(Calendar.MONTH),

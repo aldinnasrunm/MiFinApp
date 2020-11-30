@@ -20,7 +20,7 @@
 
     <ImageView
         android:id="@+id/iv_dot"
-        android:layout_width="5dp"
+        android:layout_width="8dp"
         android:layout_height="match_parent"
         android:paddingTop="2dp"
         android:paddingLeft="1dp"
