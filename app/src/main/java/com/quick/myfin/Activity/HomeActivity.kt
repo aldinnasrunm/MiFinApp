@@ -206,11 +206,21 @@ class HomeActivity : AppCompatActivity() {
     private fun updateList(){
         tv_balance.setText(formatRupiah.format(helperInOut.getBalance()))
         tv_outBalance.setText("- "+formatRupiah.format(helperInOut.getOutBalance()))
-        mAdapter = com.quick.myfin.Adapter.ListItemAdapter(helperInOut.select())
+        mAdapter = com.quick.myfin.Adapter.ListItemAdapter(helperInOut.select(), this)
         mAdapter.notifyDataSetChanged()
+
         rv_list.setHasFixedSize(true)
         rv_list.layoutManager = LinearLayoutManager(this)
         rv_list.adapter = mAdapter
+        var i : Int = rv_list.adapter!!.itemCount
+        if(i == 0){
+            ll_empty.visibility = View.VISIBLE
+            rv_list.visibility = View.INVISIBLE
+        }else{
+            ll_empty.visibility = View.GONE
+            rv_list.visibility = View.VISIBLE
+        }
+
     }
 
     companion object {
