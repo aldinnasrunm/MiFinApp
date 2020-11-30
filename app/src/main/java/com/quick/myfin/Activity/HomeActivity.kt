@@ -47,12 +47,11 @@ class HomeActivity : AppCompatActivity() {
         requestWindowFeature(1)
         setContentView(R.layout.activity_home)
         supportActionBar?.hide()
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-        window.setStatusBarColor(Color.TRANSPARENT)
+//        window.setFlags(
+//            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+//            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        window.setStatusBarColor(Color.WHITE)
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-        supportActionBar?.hide()
 
         helperInOut = inOutDatabase(this)
         val localeID = Locale("in", "ID")
@@ -196,9 +195,9 @@ class HomeActivity : AppCompatActivity() {
             }
             updateList()
         }
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this, R.style.CustomAlertDialog)
             .setView(privateView)
-            .setPositiveButton("yes", DialogInterface.OnClickListener { dialog, which ->
+            .setPositiveButton("Done", DialogInterface.OnClickListener { dialog, which ->
                 Toast.makeText(this, "click", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             }).show()

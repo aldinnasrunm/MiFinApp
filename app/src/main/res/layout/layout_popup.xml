@@ -2,56 +2,93 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/et_inputTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="name"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_inputTotal"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_title"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:hint="Title"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:inputType="number"
-        android:hint="total"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_inputTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/rg_status">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_inputTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_total"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:hint="Total"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_input_title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_inputTotal"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
         android:id="@+id/rg_status"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/bg_round_white"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/et_inputTotal"
-        app:layout_constraintStart_toStartOf="@+id/et_inputTotal"
-        app:layout_constraintTop_toBottomOf="@+id/et_inputTotal">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
             android:id="@+id/rb_status_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="IN" />
+            style="@style/textType2_white"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="3"
+            android:background="@drawable/radiobutton_selector"
+            android:button="@android:color/transparent"
+            android:text="IN"
+            android:textAlignment="center" />
+
+        <androidx.legacy.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <RadioButton
             android:id="@+id/rb_status_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="out" />
+            style="@style/textType2_white"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="3"
+            android:background="@drawable/radiobutton_selector"
+            android:button="@android:color/transparent"
+            android:text="OUT"
+            android:textAlignment="center" />
     </RadioGroup>
 
     <Button
@@ -61,11 +98,13 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_btn_color_primary"
         android:text="insert data"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rg_status" />
-    
+        app:layout_constraintTop_toBottomOf="@+id/til_input_total" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

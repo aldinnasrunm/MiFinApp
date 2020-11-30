@@ -20,6 +20,7 @@ class ShowAllActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_all)
         supportActionBar?.setElevation(0F)
+        supportActionBar?.setTitle(R.string.list_keuangan)
         tabAction = findViewById(R.id.tab_actionList)
         vp_list = findViewById(R.id.vp_list)
         setupViewPager(vp_list)

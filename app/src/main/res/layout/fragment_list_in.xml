@@ -58,14 +58,10 @@
             <TextView
                 android:id="@+id/tv_sisaIn"
                 style="@style/text_balance_title"
-                android:shadowColor="@color/emergency"
-                android:elevation="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="Rp10.000"
-
-
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -77,12 +73,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_totalIn"
-        tools:listitem="@layout/layout_list_item"/>
+        tools:listitem="@layout/layout_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
