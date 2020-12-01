@@ -2,6 +2,7 @@ package com.quick.myfin.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
@@ -19,8 +20,7 @@ class ShowAllActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_all)
-        supportActionBar?.setElevation(0F)
-        supportActionBar?.setTitle(R.string.list_keuangan)
+        supportActionBar?.hide()
         tabAction = findViewById(R.id.tab_actionList)
         vp_list = findViewById(R.id.vp_list)
         setupViewPager(vp_list)

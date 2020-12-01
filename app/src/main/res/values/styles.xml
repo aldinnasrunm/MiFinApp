@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
@@ -12,17 +12,17 @@
     </style>
 
     <style name="AppTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">@color/white</item>
-        <item name="tabIndicatorHeight">4dp</item>
-        <item name="tabIndicatorFullWidth">true</item>
+        <item name="tabIndicatorColor">#00FFFFFF</item>
+        <item name="tabIndicatorHeight">0dp</item>
+<!--        <item name="tabIndicatorFullWidth">true</item>-->
         <item name="tabPaddingStart">8dp</item>
         <item name="tabPaddingTop">5dp</item>
         <item name="tabPaddingBottom">5dp</item>
         <item name="tabPaddingEnd">8dp</item>
         <item name="tabGravity">fill</item>
-        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="tabTextAppearance">@color/colorPrimaryDark</item>
-        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
@@ -79,7 +79,7 @@
         <item name="android:textStyle">bold</item>
     </style>
     <style name="textType1_black" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textColor">#000</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">11sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -90,7 +90,7 @@
     </style>
 
     <style name="textType2_black" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textColor">#000</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">14sp</item>
     </style>
 
