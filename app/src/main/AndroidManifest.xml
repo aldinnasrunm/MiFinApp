@@ -4,12 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_fin_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_fin_app_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ShowAllActivity"></activity>
+        <activity android:name=".Activity.CashPlanActivity"></activity>
+        <activity android:name=".Activity.ShowAllActivity" />
         <activity android:name=".Activity.HomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

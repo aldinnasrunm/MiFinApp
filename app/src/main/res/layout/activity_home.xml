@@ -79,6 +79,7 @@
                     style="@style/text_balance_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/bg_btn_color_primary"
                     android:padding="5dp"
@@ -147,12 +148,24 @@
             app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:listitem="@layout/layout_list_item" />
 
+        <TextView
+
+            android:id="@+id/textView12"
+            style="@style/textItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="your calendar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_balanceList" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/rv_balanceList">
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView12">
 
             <TextView
                 android:id="@+id/calendar_year"
@@ -181,65 +194,67 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendar_month"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="AHD"
-                    android:gravity="center_horizontal"
-                    style="@style/textType2_black"
-                    android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toBottomOf="@+id/calendar_month">
 
                 <TextView
-                    android:text="SEN"
+                    style="@style/textType2_black"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    style="@style/textType2_black"
-                    android:layout_height="wrap_content"/>
+                    android:text="AHD" />
 
                 <TextView
-                    android:text="SEL"
+                    style="@style/textType2_black"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    style="@style/textType2_black"
-                    android:layout_height="wrap_content"/>
+                    android:text="SEN" />
 
                 <TextView
-                    android:text="RAB"
+                    style="@style/textType2_black"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    style="@style/textType2_black"
-                    android:layout_height="wrap_content"/>
+                    android:text="SEL" />
 
                 <TextView
-                    android:text="KAM"
+                    style="@style/textType2_black"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    style="@style/textType2_black"
-                    android:layout_height="wrap_content"/>
+                    android:text="RAB" />
 
                 <TextView
-                    android:text="JUM"
+                    style="@style/textType2_black"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    style="@style/textType2_black"
-                    android:layout_height="wrap_content"/>
+                    android:text="KAM" />
+
                 <TextView
-                    android:text="SAB"
+                    style="@style/textType2_black"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
+                    android:text="JUM" />
+
+                <TextView
                     style="@style/textType2_black"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="SAB" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -249,12 +264,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:numColumns="7"
-                tools:itemCount="7"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll_day"
-                tools:listitem="@layout/layout_item_date"/>
+                tools:itemCount="7"
+                tools:listitem="@layout/layout_item_date" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -269,14 +284,15 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_productive"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_width="wrap_content"
+            android:id="@+id/cv_cashPlan"
+            android:layout_width="120dp"
+            android:maxWidth="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="68dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -290,9 +306,7 @@
                     android:id="@+id/imageView"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
                     android:src="@drawable/ic_walletandcoint"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -315,15 +329,16 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_nonProductive"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
+            android:maxWidth="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
+            android:layout_marginEnd="32dp"
             android:clickable="true"
             android:focusable="true"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/cv_productive"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_cashPlan"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/cv_productive">
+            app:layout_constraintTop_toTopOf="@+id/cv_cashPlan">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -333,9 +348,7 @@
                     android:id="@+id/imageView2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="32dp"
-                    android:layout_marginEnd="24dp"
                     android:src="@drawable/ic_handanadcoin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

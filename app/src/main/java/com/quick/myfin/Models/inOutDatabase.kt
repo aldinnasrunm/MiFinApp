@@ -12,7 +12,7 @@ class inOutDatabase(var context: Context?) : SQLiteOpenHelper(context, "db_inOut
     private lateinit var mQuery2 : String
     override fun onCreate(db: SQLiteDatabase?) {
         mQuery = "CREATE TABLE IF NOT EXISTS tb_inOutCom(" +
-                "_id INTEGER PRIMARY KEY," +
+        "_id INTEGER PRIMARY KEY," +
                 "title_balance TEXT," +
                 "status_balance TEXT," +
                 "date TEXT,"+

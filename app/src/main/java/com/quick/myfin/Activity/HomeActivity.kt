@@ -77,6 +77,10 @@ class HomeActivity : AppCompatActivity() {
         tv_viewAll.setOnClickListener {
             startActivity(Intent(this, ShowAllActivity::class.java))
         }
+
+        cv_cashPlan.setOnClickListener {
+            startActivity(Intent(this, CashPlanActivity::class.java ))
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
