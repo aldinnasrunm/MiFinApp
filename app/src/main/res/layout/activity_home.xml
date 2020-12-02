@@ -42,7 +42,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#1A8DE8">
+                android:background="@drawable/ic_bg_balance">
 
                 <TextView
                     style="@style/textType1_white"
