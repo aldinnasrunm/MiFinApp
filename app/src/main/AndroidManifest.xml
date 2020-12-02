@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_fin_app_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.CashPlanActivity"></activity>
+        <activity android:name=".Activity.SaveCashActivity"></activity>
+        <activity android:name=".Activity.CashPlanActivity" />
         <activity android:name=".Activity.ShowAllActivity" />
         <activity android:name=".Activity.HomeActivity" />
         <activity android:name=".MainActivity">

@@ -1,26 +1,32 @@
 package com.quick.myfin.Adapter
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.database.Cursor
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.quick.myfin.Fragment.ListAllFragment
 import com.quick.myfin.Models.inOutDatabase
 import com.quick.myfin.R
 import java.text.NumberFormat
 import java.util.*
 
 
-class ListItemAdapter (c: Cursor?, mContext : Context? ): RecyclerView.Adapter<ListItemAdapter.ViewHolder>() {
+class ListItemAllAdapter(
+    c: Cursor?,
+    mCo: Context?,
+    listAllFragment: ListAllFragment
+): RecyclerView.Adapter<ListItemAllAdapter.ViewHolder>() {
     private val cursor: Cursor
-    var helperInOut: inOutDatabase = inOutDatabase(mContext)
+    val context = mCo
+    val parentFragment = listAllFragment
+    var helperInOut: inOutDatabase = inOutDatabase(mCo)
     private lateinit var formatRupiah: NumberFormat
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,6 +40,8 @@ class ListItemAdapter (c: Cursor?, mContext : Context? ): RecyclerView.Adapter<L
         cursor.moveToPosition(position)
         val localeID = Locale("in", "ID")
         formatRupiah = NumberFormat.getCurrencyInstance(localeID)
+        val itemId : Int =
+            cursor.getInt(cursor.getColumnIndex("_id"))
         val textTitle: String =
             cursor.getString(cursor.getColumnIndex("title_balance"))
         val textTotal: Int =
@@ -54,7 +62,9 @@ class ListItemAdapter (c: Cursor?, mContext : Context? ): RecyclerView.Adapter<L
         holder.total.text = statusSign + " " + formatRupiah.format(textTotal)
         holder.date.text = part[0]
         holder.month.text = part[1]
-//        holder.root.setOnLongClickListener(cursor.getInt(cursor.getColumnIndex("_id") ))
+        holder.root.setOnClickListener{
+            parentFragment.deleteItem(itemId)
+        }
     }
 
 
@@ -78,9 +88,6 @@ class ListItemAdapter (c: Cursor?, mContext : Context? ): RecyclerView.Adapter<L
         }
     }
 
-    fun removeAt(adapterPosition: Int) {
-        helperInOut.deleteItem(adapterPosition)
-    }
 
     init {
         cursor = c!!

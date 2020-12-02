@@ -329,7 +329,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_nonProductive"
+            android:id="@+id/cv_saveCash"
             android:layout_width="120dp"
             android:maxWidth="160dp"
             android:layout_height="wrap_content"

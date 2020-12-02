@@ -81,6 +81,9 @@ class HomeActivity : AppCompatActivity() {
         cv_cashPlan.setOnClickListener {
             startActivity(Intent(this, CashPlanActivity::class.java ))
         }
+        cv_saveCash.setOnClickListener {
+            startActivity(Intent(this, SaveCashActivity::class.java))
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -225,6 +228,11 @@ class HomeActivity : AppCompatActivity() {
             rv_list.visibility = View.VISIBLE
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateList()
     }
 
     companion object {

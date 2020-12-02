@@ -1,5 +1,7 @@
 package com.quick.myfin.Fragment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.quick.myfin.Adapter.ListItemAdapter
+import com.airbnb.lottie.LottieAnimationView
+import com.quick.myfin.Adapter.ListItemAllAdapter
 import com.quick.myfin.Models.inOutDatabase
 import com.quick.myfin.R
 
@@ -15,7 +18,7 @@ import com.quick.myfin.R
 class ListAllFragment : Fragment() {
 
     lateinit var rv_listAll : RecyclerView
-    lateinit var mAdapter : ListItemAdapter
+    lateinit var mAdapter : ListItemAllAdapter
     lateinit var helperInOut : inOutDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +37,35 @@ class ListAllFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         helperInOut = inOutDatabase(context)
-        mAdapter = ListItemAdapter(helperInOut.select(), context)
+        updateList()
+
+    }
+
+    private fun updateList() {
+        mAdapter = ListItemAllAdapter(helperInOut.select(), context, this)
+        mAdapter.notifyDataSetChanged()
         rv_listAll.setHasFixedSize(true)
         rv_listAll.layoutManager = LinearLayoutManager(context)
         rv_listAll.adapter = mAdapter
+        rv_listAll.getAdapter()?.notifyDataSetChanged()
+    }
 
+    fun deleteItem(pos : Int){
+        val deleteView : View = LayoutInflater.from(context).inflate(R.layout.layout_delete_item, null, false)
+        val deleteAnimation : LottieAnimationView = deleteView.findViewById(R.id.deleteAnimation)
+        deleteAnimation.playAnimation()
+        AlertDialog.Builder(context, R.style.CustomAlertDialog)
+            .setView(deleteView)
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+                helperInOut.deleteItem(pos)
+                updateList()
+            })
+            .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->
+                dialog.cancel()
+            })
+            .setCancelable(false)
+            .show()
     }
 }
+
+

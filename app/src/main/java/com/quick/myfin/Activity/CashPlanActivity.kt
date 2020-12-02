@@ -8,13 +8,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.textfield.TextInputEditText
 import com.quick.myfin.Adapter.CashPlantAdapter
-import com.quick.myfin.Adapter.ListItemAdapter
 import com.quick.myfin.Models.cashPlantDatabase
 import com.quick.myfin.Models.inOutDatabase
 import com.quick.myfin.R
@@ -44,7 +44,7 @@ class CashPlanActivity : AppCompatActivity() {
     }
 
     private fun updateView() {
-        mAdapter = CashPlantAdapter(helperCashPlan.select(), this)
+        mAdapter = CashPlantAdapter(helperCashPlan.select(), this, this)
         mAdapter.notifyDataSetChanged()
         rv_listCashPlant.setHasFixedSize(true)
         rv_listCashPlant.layoutManager = LinearLayoutManager(this)
@@ -65,18 +65,21 @@ class CashPlanActivity : AppCompatActivity() {
         val btn_input : Button = popUpView.findViewById(R.id.btn_inputCashPlan)
         val et_title : TextInputEditText = popUpView.findViewById(R.id.et_inputTitleCashPlan)
         val et_total : TextInputEditText = popUpView.findViewById(R.id.et_inputTotalCashPlan)
-        val current = LocalDateTime.now()
 
+        val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
         val formatted = current.format(formatter)
 
         btn_input.setOnClickListener {
-            val value  = ContentValues()
-            value.put("title_cash_plan", et_title.text.toString())
-            value.put("date", formatted)
-            value.put("total_cash_plan", (et_total.text.toString()).toLongOrNull())
-            helperCashPlan.insertData(value)
-
+            if (et_title.text.toString().equals("") || et_total.text.toString().equals("")){
+                Toast.makeText(this, "Ups, kamu belum mengisi semua datanya", Toast.LENGTH_SHORT).show()
+            }else {
+                val value = ContentValues()
+                value.put("title_cash_plan", et_title.text.toString())
+                value.put("date", formatted)
+                value.put("total_cash_plan", (et_total.text.toString()).toLongOrNull())
+                helperCashPlan.insertData(value)
+            }
         }
         AlertDialog.Builder(this, R.style.CustomAlertDialog)
             .setView(popUpView)
@@ -85,4 +88,22 @@ class CashPlanActivity : AppCompatActivity() {
                 dialog.cancel()
             }).show()
     }
+
+    fun deleteItem(pos : Int){
+        val deleteView : View = LayoutInflater.from(this).inflate(R.layout.layout_delete_item, null, false)
+        val deleteAnimation : LottieAnimationView = deleteView.findViewById(R.id.deleteAnimation)
+        deleteAnimation.playAnimation()
+        android.app.AlertDialog.Builder(this, R.style.CustomAlertDialog)
+            .setView(deleteView)
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+                helperCashPlan.deleteItem(pos)
+                updateView()
+            })
+            .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->
+                dialog.cancel()
+            })
+            .setCancelable(false)
+            .show()
+    }
+
 }

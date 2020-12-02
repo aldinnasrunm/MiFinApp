@@ -1,9 +1,7 @@
 package com.quick.myfin.Activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.quick.myfin.Adapter.BalanceViewPagerAdapter
@@ -33,6 +31,7 @@ class ShowAllActivity : AppCompatActivity() {
         mAdapter.addFrag(ListInFragment(), "MASUK")
         mAdapter.addFrag(ListOutFragment(), "KELUAR")
         vp_list.adapter = mAdapter
+        vp_list.offscreenPageLimit = 1
         tabAction.setupWithViewPager(vpList)
     }
 }
