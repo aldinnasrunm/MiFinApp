@@ -9,7 +9,7 @@
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="65dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_cashPlanRoot"
@@ -17,6 +17,14 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark">
 
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="125dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/circle_light_thin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <View
             android:id="@+id/view"
             android:layout_width="5dp"
