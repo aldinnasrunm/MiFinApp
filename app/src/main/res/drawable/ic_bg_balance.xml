@@ -20,16 +20,4 @@
       </gradient>
     </aapt:attr>
   </path>
-  <path
-      android:pathData="M102,0.5C102,20.658 85.658,37 65.5,37C45.342,37 29,20.658 29,0.5C29,0.333 29.001,0.166 29.003,0H18.003C18.001,0.166 18,0.333 18,0.5C18,26.733 39.266,48 65.5,48C91.733,48 113,26.733 113,0.5C113,0.333 112.999,0.166 112.997,0H101.997C101.999,0.166 102,0.333 102,0.5Z"
-      android:strokeAlpha="0.8"
-      android:fillColor="#A6DCF1"
-      android:fillType="evenOdd"
-      android:fillAlpha="0.8"/>
-  <path
-      android:pathData="M350,69.23C336.883,65.18 322.946,63 308.5,63C249.847,63 199.588,98.94 178.545,150H210.65C229.588,115.436 266.307,92 308.5,92C323.167,92 337.173,94.832 350,99.979V69.23Z"
-      android:strokeAlpha="0.8"
-      android:fillColor="#039DDA"
-      android:fillType="evenOdd"
-      android:fillAlpha="0.8"/>
 </vector>

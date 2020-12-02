@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.res.Resources
 import android.database.Cursor
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -48,7 +49,7 @@ class ListItemAdapter (c: Cursor?, mContext : Context? ): RecyclerView.Adapter<L
             statusSign = "+"
         } else {
             statusSign = "-"
-            holder.root.setBackgroundColor(Color.parseColor("#294870"))
+            holder.root.setBackgroundResource(R.drawable.ic_list_bg_minus)
         }
         holder.title.text = textTitle
         holder.total.text = statusSign + " " + formatRupiah.format(textTotal)

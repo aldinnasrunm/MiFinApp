@@ -56,7 +56,7 @@ class ListItemAllAdapter(
             statusSign = "+"
         } else {
             statusSign = "-"
-            holder.root.setBackgroundColor(Color.parseColor("#294870"))
+            holder.root.setBackgroundResource(R.drawable.ic_list_bg_minus)
         }
         holder.title.text = textTitle
         holder.total.text = statusSign + " " + formatRupiah.format(textTotal)
